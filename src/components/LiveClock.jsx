@@ -43,10 +43,9 @@ export default function LiveClock() {
     }
   };
 
-  // London: 08:00–16:30 local | NY: 08:00–17:00 local | Tokyo: 09:00–15:00 local
+  // London: 08:00–16:30 local | NY: 08:00–17:00 local
   const ldnOpen = isSessionOpen(time, "Europe/London", 8, 0, 16, 30);
   const nyOpen = isSessionOpen(time, "America/New_York", 8, 0, 17, 0);
-  const tkyOpen = isSessionOpen(time, "Asia/Tokyo", 9, 0, 15, 0);
 
   const sessions = [
     {
@@ -67,59 +66,52 @@ export default function LiveClock() {
       active: nyOpen,
       title: nyOpen ? "New York session OPEN (Peak Gold Volume)" : "New York session closed",
     },
-    {
-      label: "TKY",
-      tz: "Asia/Tokyo",
-      active: tkyOpen,
-      title: tkyOpen ? "Tokyo session OPEN (Asian Session Range)" : "Tokyo session closed",
-    },
-    {
-      label: "BD",
-      tz: "Asia/Dhaka",
-      active: false,
-      title: "Bangladesh Standard Time (UTC+6)",
-    },
   ];
 
   return (
-    <div className="hidden items-center gap-3.5 xl:flex select-none">
-      {sessions.map((s) => (
-        <div key={s.label} className="flex items-center gap-1.5" title={s.title}>
-          <span
-            className={`inline-block h-1.5 w-1.5 rounded-full transition-colors duration-500 ${
-              s.active
-                ? "bg-emerald-400 shadow-[0_0_8px_1px_rgba(52,211,153,0.8)] animate-pulse"
-                : "bg-zinc-700"
-            }`}
-          />
-          <span
-            className={`text-[9.5px] font-bold uppercase tracking-wider transition-colors ${
-              s.active ? "text-emerald-400" : "text-zinc-500"
-            }`}
+    <div className="flex items-center gap-2.5 sm:gap-3 shrink-0 select-none">
+      {/* Subtle inline clock displays */}
+      <div className="flex items-center gap-2.5 sm:gap-3 px-2.5 py-1 rounded-md bg-[#181c28]/70 border border-[#262b3a]/70 shrink-0">
+        {sessions.map((s) => (
+          <div
+            key={s.label}
+            className="flex items-center gap-1.5 shrink-0"
+            title={s.title}
           >
-            {s.label}
-          </span>
-          <span
-            className={`font-mono text-[11px] font-semibold tabular-nums transition-colors ${
-              s.active ? "text-emerald-300 font-bold" : "text-amber-400/90"
-            }`}
-          >
-            {fmt(s.tz)}
-          </span>
-        </div>
-      ))}
+            <span
+              className={`inline-block h-1.5 w-1.5 rounded-full shrink-0 transition-colors duration-300 ${
+                s.active
+                  ? "bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)] animate-pulse"
+                  : "bg-zinc-600"
+              }`}
+            />
+            <span
+              className={`text-[10px] font-bold uppercase tracking-wider shrink-0 transition-colors ${
+                s.active ? "text-emerald-400" : "text-zinc-400"
+              }`}
+            >
+              {s.label}
+            </span>
+            <span
+              className={`font-mono text-[11px] font-semibold tabular-nums shrink-0 transition-colors ${
+                s.active ? "text-emerald-300 font-bold" : "text-zinc-300"
+              }`}
+            >
+              {fmt(s.tz)}
+            </span>
+          </div>
+        ))}
+      </div>
 
       {/* Active Session Status Badge */}
-      {(ldnOpen || nyOpen || tkyOpen) && (
-        <span className="ml-1 flex items-center gap-1.5 rounded-full bg-emerald-950/70 border border-emerald-500/30 px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-emerald-400 shadow-sm shadow-emerald-900/30">
-          <span className="h-1.5 w-1.5 animate-ping rounded-full bg-emerald-400" />
+      {(ldnOpen || nyOpen) && (
+        <span className="shrink-0 flex items-center gap-1.5 rounded-full bg-emerald-950/60 border border-emerald-500/30 px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider text-emerald-400 whitespace-nowrap shadow-sm shadow-emerald-950/40">
+          <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400 animate-pulse" />
           {ldnOpen && nyOpen
             ? "LDN + NY Overlap (Max Volume)"
             : ldnOpen
             ? "LDN Session Active"
-            : nyOpen
-            ? "NY Session Active"
-            : "Tokyo Session Active"}
+            : "NY Session Active"}
         </span>
       )}
     </div>
