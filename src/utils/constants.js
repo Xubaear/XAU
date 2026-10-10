@@ -1,48 +1,49 @@
 // ─────────────────────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────────────
 // XAU/USD TRADING DASHBOARD — CONSTANTS & HELPERS
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const LS_DATA_KEY   = "xau_notebook_v3";
+export const LS_DATA_KEY = "xau_notebook_v3";
 export const CANVAS_PREFIX = "xau_canvas_";
-export const CANVAS_W      = 1600;
-export const CANVAS_H      = 900;
+export const CANVAS_W = 1600;
+export const CANVAS_H = 900;
 
 export const STROKE_COLORS = [
-  { id: "bullish",   hex: "#22c55e", label: "Bullish Green" },
-  { id: "bearish",   hex: "#ef4444", label: "Bearish Red"   },
-  { id: "sr",        hex: "#38bdf8", label: "S/R Line (Sky)"},
-  { id: "keylevel",  hex: "#f59e0b", label: "Key Level (Gold)"},
-  { id: "liquidity", hex: "#a855f7", label: "Liquidity (Purple)"},
-  { id: "neutral",   hex: "#f8fafc", label: "Neutral White" },
+  { id: "bullish", hex: "#22c55e", label: "Bullish Green" },
+  { id: "bearish", hex: "#ef4444", label: "Bearish Red" },
+  { id: "sr", hex: "#38bdf8", label: "S/R Line (Sky)" },
+  { id: "keylevel", hex: "#f59e0b", label: "Key Level (Gold)" },
+  { id: "liquidity", hex: "#a855f7", label: "Liquidity (Purple)" },
+  { id: "neutral", hex: "#f8fafc", label: "Neutral White" },
 ];
 
 export const STROKE_SIZES = [
-  { id: "fine",   size: 1.5, label: "Fine"   },
+  { id: "fine", size: 1.5, label: "Fine" },
   { id: "medium", size: 3.5, label: "Medium" },
-  { id: "bold",   size: 7,   label: "Bold"   },
-  { id: "heavy",  size: 12,  label: "Heavy"  },
+  { id: "bold", size: 7, label: "Bold" },
+  { id: "heavy", size: 12, label: "Heavy" },
 ];
 
 export const CANVAS_TOOLS = {
-  PEN:    "pen",
-  LINE:   "line",
-  RECT:   "rect",
+  PEN: "pen",
+  LINE: "line",
+  RECT: "rect",
   CIRCLE: "circle",
   ERASER: "eraser",
 };
 
 export const PRESET_TAGS = [
-  { name: "#XAUUSD",    color: "bg-amber-500/15 text-amber-300 border-amber-500/30" },
-  { name: "#Breakout",  color: "bg-sky-500/15 text-sky-300 border-sky-500/30" },
-  { name: "#Reversal",  color: "bg-purple-500/15 text-purple-300 border-purple-500/30" },
-  { name: "#Win",       color: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30" },
-  { name: "#Loss",      color: "bg-rose-500/15 text-rose-300 border-rose-500/30" },
-  { name: "#Missed",    color: "bg-zinc-500/15 text-zinc-300 border-zinc-500/30" },
-  { name: "#London",    color: "bg-blue-500/15 text-blue-300 border-blue-500/30" },
-  { name: "#NY",        color: "bg-orange-500/15 text-orange-300 border-orange-500/30" },
-  { name: "#Asian",     color: "bg-yellow-500/15 text-yellow-300 border-yellow-500/30" },
-  { name: "#OrderBlock",color: "bg-teal-500/15 text-teal-300 border-teal-500/30" },
-  { name: "#FVG",       color: "bg-indigo-500/15 text-indigo-300 border-indigo-500/30" },
+  { name: "#XAUUSD", color: "bg-amber-500/15 text-amber-300 border-amber-500/30" },
+  { name: "#Breakout", color: "bg-sky-500/15 text-sky-300 border-sky-500/30" },
+  { name: "#Reversal", color: "bg-purple-500/15 text-purple-300 border-purple-500/30" },
+  { name: "#Win", color: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30" },
+  { name: "#Loss", color: "bg-rose-500/15 text-rose-300 border-rose-500/30" },
+  { name: "#Missed", color: "bg-zinc-500/15 text-zinc-300 border-zinc-500/30" },
+  { name: "#London", color: "bg-blue-500/15 text-blue-300 border-blue-500/30" },
+  { name: "#NY", color: "bg-orange-500/15 text-orange-300 border-orange-500/30" },
+  { name: "#Asian", color: "bg-yellow-500/15 text-yellow-300 border-yellow-500/30" },
+  { name: "#OrderBlock", color: "bg-teal-500/15 text-teal-300 border-teal-500/30" },
+  { name: "#FVG", color: "bg-indigo-500/15 text-indigo-300 border-indigo-500/30" },
 ];
 
 export const DEFAULT_CHECKLIST = [
@@ -79,11 +80,11 @@ export const fmtTs = (iso) => {
 };
 
 export const makeNote = (title = "Untitled Setup", initialTags = ["#XAUUSD"]) => ({
-  id:        uid(),
+  id: uid(),
   title,
-  content:   "",
-  canvas:    "",
-  tags:      initialTags,
+  content: "",
+  canvas: "",
+  tags: initialTags,
   checklist: DEFAULT_CHECKLIST.map((item) => ({ ...item, id: uid() })),
   createdAt: nowTs(),
   updatedAt: nowTs(),
@@ -92,10 +93,10 @@ export const makeNote = (title = "Untitled Setup", initialTags = ["#XAUUSD"]) =>
 export const makeFolder = (name = "New Strategy") => {
   const note = makeNote("First Trade Setup", ["#XAUUSD", "#Breakout"]);
   return {
-    id:       uid(),
+    id: uid(),
     name,
     expanded: true,
-    notes:    [note],
+    notes: [note],
   };
 };
 
@@ -133,8 +134,8 @@ export const buildDefaultData = () => {
   const note2 = makeNote("Risk Management & Rules", ["#XAUUSD"]);
   const note3 = makeNote("Asian Session Liquidity Sweep", ["#XAUUSD", "#Reversal", "#Asian"]);
 
-  const folder1 = { id: uid(), name: "XAU Setups",       expanded: true,  notes: [note1, note2] };
-  const folder2 = { id: uid(), name: "Session Strategies", expanded: true,  notes: [note3] };
+  const folder1 = { id: uid(), name: "XAU Setups", expanded: true, notes: [note1, note2] };
+  const folder2 = { id: uid(), name: "Session Strategies", expanded: true, notes: [note3] };
 
   return {
     folders: [folder1, folder2],
