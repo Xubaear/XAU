@@ -29,8 +29,26 @@ export const CANVAS_TOOLS = {
   LINE: "line",
   RECT: "rect",
   CIRCLE: "circle",
+  TEXT: "text",
   ERASER: "eraser",
 };
+
+export const QUICK_ZONE_TAGS = [
+  "OB",
+  "FVG",
+  "BOS",
+  "CHoCH",
+  "LQ Sweep",
+  "Demand",
+  "Supply",
+  "SL/TP",
+];
+
+export const TEXT_FONT_SIZES = [
+  { id: "sm", label: "S", px: 14, title: "Small (14px)" },
+  { id: "md", label: "M", px: 18, title: "Medium (18px)" },
+  { id: "lg", label: "L", px: 24, title: "Large (24px)" },
+];
 
 export const PRESET_TAGS = [
   { name: "#XAUUSD", color: "bg-amber-500/15 text-amber-300 border-amber-500/30" },
